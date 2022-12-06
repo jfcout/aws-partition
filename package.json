@@ -1,0 +1,26 @@
+{
+  "name": "sst-gcr",
+  "version": "0.0.6",
+  "description": "Support GCR for SST.",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "type": "module",
+  "exports": {
+    "import": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "",
+  "license": "ISC",
+  "bin": {
+    "sst-gcr": "bin/index.ts"
+  },
+  "devDependencies": {
+    "@serverless-stack/resources": "^1.18.4",
+    "@types/node": "^18.11.11"
+  }
+}
