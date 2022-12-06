@@ -4,10 +4,8 @@ Just Support GCR for SST.
 
 ## Install
 
-```
-$ npm install sst-gcr --save
-$ npm install
-$ npm run test
+```shell
+npm install sst-gcr --save
 ```
 
 ## Use
