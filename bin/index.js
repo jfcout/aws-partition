@@ -4,34 +4,30 @@ import * as path from "path";
 import * as fs from "fs";
 
 if (!process.argv[2]) {
-    console.error("Must input aws partition");
+    throw new Error("Must input aws partition");
 }
 
 const partition = process.argv[2];
 
 if (partition !== "aws" && partition !== 'aws-cn') {
-    console.error(`The aws partition must be 'aws' or 'aws-cn'`);
+    throw new Error("The aws partition must be 'aws' or 'aws-cn'");
 }
 
 const walk = dir => {
-    try {
-        let results = [];
-        const list = fs.readdirSync(dir);
-        list.forEach(file => {
-            file = path.join(dir, file);
-            const stat = fs.statSync(file);
-            if (stat && stat.isDirectory()) {
-                // Recurse into subdir
-                results = [...results, ...walk(file)];
-            } else {
-                // Is a file
-                results.push(file);
-            }
-        });
-        return results;
-    } catch (error) {
-        console.error(`Error when walking dir ${dir}`);
-    }
+    let results = [];
+    const list = fs.readdirSync(dir);
+    list.forEach(file => {
+        file = path.join(dir, file);
+        const stat = fs.statSync(file);
+        if (stat && stat.isDirectory()) {
+            // Recurse into subdir
+            results = [...results, ...walk(file)];
+        } else {
+            // Is a file
+            results.push(file);
+        }
+    });
+    return results;
 };
 const updatePartition = (partition, filePath) => {
     if (!filePath.endsWith("ts") && !filePath.endsWith("mjs") && !filePath.endsWith("js")) {
