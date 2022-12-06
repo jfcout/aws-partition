@@ -1,8 +1,9 @@
 {
   "name": "sst-gcr",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "Support GCR for SST.",
   "main": "index.js",
+  "types": "index.d.ts",
   "type": "module",
   "keywords": [
     "aws",
