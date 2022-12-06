@@ -39,6 +39,6 @@ const updatePartition = (app, filePath) => {
 };
 
 export function Gcr(app) {
-    const dir = `${process.env.PWD}/node_modules/@serverless-stack/resources`;
+    const dir = `${process.env.PWD}/node_modules/@serverless-stack`;
     walk(dir).forEach(filePath => updatePartition(app, filePath));
 }
