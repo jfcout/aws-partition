@@ -28,11 +28,14 @@ const updatePartition = (app, filePath) => {
     const old_partition = app.region.startsWith('cn-') ? 'aws' : 'aws-cn';
     const new_partition = app.region.startsWith('cn-') ? 'aws-cn' : 'aws';
     const oldContent = fs.readFileSync(filePath, {encoding: 'utf8'});
-    const regex = `arn:${old_partition}:`;
-    const replaceVal = `arn:${new_partition}:`;
-    const newContent = oldContent.replaceAll(regex, replaceVal);
-    fs.writeFileSync(filePath, newContent, {encoding: 'utf-8'});
-    console.log(`${filePath} updated`);
+    const newContent = oldContent.replaceAll(
+        `arn:${old_partition}:`,
+        `arn:${new_partition}:`
+    );
+    if (oldContent.toString() !== newContent.toString()) {
+        fs.writeFileSync(filePath, newContent, {encoding: 'utf-8'});
+        console.log(`${filePath} updated`);
+    }
 };
 
 export function Gcr(app) {
