@@ -4,13 +4,13 @@ import * as path from "path";
 import * as fs from "fs";
 
 if (!process.argv[2]) {
-    throw new Error("Must input aws partition");
+    console.error("Must input aws partition");
 }
 
 const partition = process.argv[2];
 
 if (partition !== "aws" && partition !== 'aws-cn') {
-    throw new Error("The aws partition must be 'aws' or 'aws-cn'");
+    console.error(`The aws partition must be 'aws' or 'aws-cn'`);
 }
 
 const walk = dir => {
