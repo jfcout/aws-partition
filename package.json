@@ -1,6 +1,6 @@
 {
   "name": "sst-gcr",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Support GCR for SST.",
   "main": "index.js",
   "types": "index.d.ts",
@@ -19,8 +19,8 @@
   "publishConfig": {
     "access": "public"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "elon.niu@gmail.com",
+  "license": "MIT",
   "bin": {
     "sst-gcr": "bin/index.ts"
   },
