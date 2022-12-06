@@ -48,4 +48,4 @@ const updatePartition = (partition, filePath) => {
 const dir = `${process.env.PWD}/node_modules/@serverless-stack`;
 walk(dir).forEach(filePath => updatePartition(partition, filePath));
 
-console.info(`You deploy partition is: ${partition} now.`);
+console.info(`Now, Your deploy partition is: ${partition}`);
