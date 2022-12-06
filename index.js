@@ -22,7 +22,7 @@ const walk = dir => {
     }
 };
 const updatePartition = (app, filePath) => {
-    if (!filePath.endsWith("ts") && !filePath.endsWith("mjs")) {
+    if (!filePath.endsWith("ts") && !filePath.endsWith("mjs") && !filePath.endsWith("js")) {
         return;
     }
     const old_partition = app.region.startsWith('cn-') ? 'aws' : 'aws-cn';
