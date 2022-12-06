@@ -1,14 +1,14 @@
 {
   "name": "sst-partition",
-  "version": "0.0.1",
-  "description": "Support GCR for SST.",
+  "version": "0.0.5",
+  "description": "Just Support Change Partition for SST.",
   "main": "index.js",
   "types": "index.d.ts",
   "type": "module",
   "keywords": [
     "aws",
     "sst",
-    "gcr"
+    "partition"
   ],
   "exports": {
     "import": "./index.js"
@@ -22,7 +22,7 @@
   "author": "elon.niu@gmail.com",
   "license": "MIT",
   "bin": {
-    "sst-gcr": "bin/index.js"
+    "sst-partition": "bin/index.js"
   },
   "devDependencies": {
     "@types/node": "^18.11.11"

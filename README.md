@@ -1,25 +1,15 @@
 # README
 
-Just Support GCR for SST.
+Just Support Change Partition for SST.
 
 ## Install
 
 ```shell
-npm install sst-gcr --save
+npm install sst-partition --save
 ```
 
 ## CLI
 
 ```bash
-sst-gcr aws
-```
-
-## Use
-
-```typescript
-import {Gcr} from "sst-gcr";
-
-export default function main(app: App) {
-    Gcr(app);
-}
+sst-partition aws
 ```
