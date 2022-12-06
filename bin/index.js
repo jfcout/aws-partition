@@ -4,13 +4,13 @@ import * as path from "path";
 import * as fs from "fs";
 
 if (!process.argv[2]) {
-    throw new Error("Must input aws partition");
+    throw new Error("Must input AWS partition");
 }
 
 const partition = process.argv[2];
 
 if (partition !== "aws" && partition !== 'aws-cn') {
-    throw new Error("The aws partition must be 'aws' or 'aws-cn'");
+    throw new Error("The AWS partition must be 'aws' or 'aws-cn'");
 }
 
 const walk = dir => {
@@ -48,4 +48,4 @@ const updatePartition = (partition, filePath) => {
 const dir = `${process.env.PWD}/node_modules/@serverless-stack`;
 walk(dir).forEach(filePath => updatePartition(partition, filePath));
 
-console.info(`Now, Your deploy partition is: ${partition}`);
+console.info(`Now, Your AWS partition is: ${partition}`);
