@@ -5,6 +5,11 @@
   "main": "index.js",
   "types": "index.d.ts",
   "type": "module",
+  "keywords": [
+    "aws",
+    "sst",
+    "gcr"
+  ],
   "exports": {
     "import": "./index.js"
   },
