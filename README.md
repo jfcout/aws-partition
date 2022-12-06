@@ -8,6 +8,12 @@ Just Support GCR for SST.
 npm install sst-gcr --save
 ```
 
+## CLI
+
+```bash
+sst-gcr aws
+```
+
 ## Use
 
 ```typescript

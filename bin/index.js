@@ -41,9 +41,11 @@ const updatePartition = (partition, filePath) => {
     );
     if (oldContent.toString() !== newContent.toString()) {
         fs.writeFileSync(filePath, newContent, {encoding: 'utf-8'});
-        console.log(`${filePath} Updated`);
+        console.info(`${filePath} Updated`);
     }
 };
 
 const dir = `${process.env.PWD}/node_modules/@serverless-stack`;
 walk(dir).forEach(filePath => updatePartition(partition, filePath));
+
+console.info(`You deploy partition is: ${partition} now.`);
