@@ -1,6 +1,6 @@
 {
   "name": "sst-gcr",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Support GCR for SST.",
   "main": "index.js",
   "types": "index.d.ts",
@@ -22,7 +22,7 @@
   "author": "elon.niu@gmail.com",
   "license": "MIT",
   "bin": {
-    "sst-gcr": "bin/index.ts"
+    "sst-gcr": "bin/index.js"
   },
   "devDependencies": {
     "@types/node": "^18.11.11"
