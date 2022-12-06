@@ -20,7 +20,6 @@
     "sst-gcr": "bin/index.ts"
   },
   "devDependencies": {
-    "@serverless-stack/resources": "^1.18.4",
     "@types/node": "^18.11.11"
   }
 }
