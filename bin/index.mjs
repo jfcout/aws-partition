@@ -4,25 +4,35 @@ import * as path from "path";
 import * as fs from "fs";
 import execSh from "exec-sh";
 
+const parsePackage = (file) => {
+    return JSON.parse(fs.readFileSync(file, {encoding: 'utf8'}));
+};
+
+const version = () => {
+    const json = parsePackage('../package.json');
+    console.info(`${json.name} version: ${json.version}`);
+};
+
 if (process.argv[2]) {
     const command = process.argv[2];
 
     if (command === 'update' || command === 'upgrade') {
 
         execSh("sudo npm i -g aws-partition --registry=https://registry.npmjs.org",
-            {cwd: "/home"},
+            {},
             function (err, out) {
                 if (err) {
                     console.error(err.message);
                 }
             });
 
+        version();
+
         process.exit(0);
     }
 
     if (command === 'version' || command === '-v') {
-        const json = JSON.parse(fs.readFileSync('../package.json', {encoding: 'utf8'}));
-        console.info(`aws-partition version: ${json.version}`);
+        version();
         process.exit(0);
     }
 
@@ -30,14 +40,8 @@ if (process.argv[2]) {
     process.exit(-1);
 }
 
-
 const walk = dir => {
     let results = [];
-
-    if (!fs.existsSync(dir)) {
-        console.info(`No SST detected in: ${dir}`);
-        return results;
-    }
 
     const list = fs.readdirSync(dir);
     list.forEach(file => {
@@ -81,5 +85,11 @@ const sst = (file) => {
 };
 
 // for sst
-walk(`${process.env.PWD}/node_modules/@serverless-stack`)
-    .forEach(file => sst(file));
+const sst_path = './node_modules/@serverless-stack';
+
+if (fs.existsSync(sst_path)) {
+    console.info('SST Found');
+    walk(sst_path)
+        .forEach(file => sst(file));
+    console.info('SST Done');
+}
