@@ -73,7 +73,11 @@ const updatePartition = (partition, filePath) => {
     }
 };
 
-const dir = `${process.env.PWD}/node_modules/@serverless-stack`;
-walk(dir).forEach(filePath => updatePartition(partition, filePath));
+const base = `${process.env.PWD}/node_modules`;
+
+// for sst
+walk(`${base}/@serverless-stack`).forEach(filePath => updatePartition(partition, filePath));
+
+// for other...
 
 console.info(`Your AWS partition has been switched to: ${partition}`);
