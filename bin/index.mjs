@@ -37,10 +37,10 @@ const sst = (file) => {
 
     const newContent = oldContent.replaceAll(
         '"arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"',
-        "`arn:${process.env?.AWS_PARTITION || 'aws'}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole`"
+        "`arn:${['aws', 'aws-cn', 'aws-us-gov', 'aws-iso', 'aws-iso-b'].includes(process.env.AWS_PARTITION) ? process.env.AWS_PARTITION : console.error('AWS_PARTITION Error') || process.exit(-1)}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole`"
     ).replaceAll(
         /arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):/g,
-        "arn:${process.env?.AWS_PARTITION || 'aws'}:"
+        "arn:${['aws', 'aws-cn', 'aws-us-gov', 'aws-iso', 'aws-iso-b'].includes(process.env.AWS_PARTITION) ? process.env.AWS_PARTITION : console.error('AWS_PARTITION Error') || process.exit(-1)}:"
     );
 
     if (oldContent.toString() !== newContent.toString()) {
