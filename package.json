@@ -1,6 +1,6 @@
 {
   "name": "aws-partition",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "A CLI to help change AWS Partition for Serverless Framework.",
   "bin": {
     "aws-partition": "bin/index.mjs"
@@ -24,5 +24,8 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^18.11.11"
+  },
+  "dependencies": {
+    "exec-sh": "^0.4.0"
   }
 }
