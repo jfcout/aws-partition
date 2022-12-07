@@ -41,6 +41,9 @@ const sst = (file) => {
     ).replaceAll(
         /arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):/g,
         "arn:${['aws-cn', 'aws-us-gov', 'aws-iso', 'aws-iso-b'].includes(process.env.AWS_PARTITION) ? process.env.AWS_PARTITION : 'aws'}:"
+    ).replaceAll(
+        'cdk.Tags.of(child).add("sst:',
+        '// cdk.Tags.of(child).add("sst:'
     );
 
     if (oldContent.toString() !== newContent.toString()) {
