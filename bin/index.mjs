@@ -4,13 +4,8 @@ import * as path from "path";
 import * as fs from "fs";
 import execSh from "exec-sh";
 
-const parsePackage = (file) => {
-    return JSON.parse(fs.readFileSync(path.resolve(file), {encoding: 'utf8'}));
-};
-
 const version = () => {
-    const json = parsePackage('../package.json');
-    console.info(`${json.name} version: ${json.version}`);
+    console.info(`aws-partition version: 0.0.19`);
 };
 
 if (process.argv[2]) {
