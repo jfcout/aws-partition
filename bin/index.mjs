@@ -18,7 +18,7 @@ if (process.argv[2]) {
 
     if (command === 'update' || command === 'upgrade') {
 
-        execSh("sudo npm i -g aws-partition --registry=https://registry.npmjs.org",
+        execSh("npm i -g aws-partition --registry=https://registry.npmjs.org",
             {},
             function (err, out) {
                 if (err) {
