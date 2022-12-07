@@ -8,8 +8,14 @@ A CLI to help change AWS Partition for Serverless Framework.
 npm install aws-partition -g
 ```
 
-## CLI
+## Update
 
 ```bash
 aws-partition
+```
+
+## Use
+
+```shell
+export AWS_PARTITION=aws
 ```
