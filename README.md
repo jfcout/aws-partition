@@ -12,4 +12,8 @@ npm install aws-partition -g
 
 ```bash
 aws-partition aws
+aws-partition aws-cn
+aws-partition aws-us-gov
+aws-partition aws-iso
+aws-partition aws-iso-b
 ```

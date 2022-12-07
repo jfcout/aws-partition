@@ -9,12 +9,26 @@ if (!process.argv[2]) {
 
 const partition = process.argv[2];
 
-if (partition !== "aws" && partition !== 'aws-cn') {
-    throw new Error("The AWS partition must be 'aws' or 'aws-cn'");
+const partitions = [
+    'aws',
+    'aws-cn',
+    'aws-us-gov',
+    'aws-iso',
+    'aws-iso-b',
+];
+
+if (!partitions.includes(partition)) {
+    throw new Error(`The AWS partition must be in ${partitions.join(', ')}`);
 }
 
 const walk = dir => {
     let results = [];
+
+    if (!fs.existsSync(dir)) {
+        console.info(`No SST detected in: ${dir}`);
+        return results;
+    }
+
     const list = fs.readdirSync(dir);
     list.forEach(file => {
         file = path.join(dir, file);
@@ -27,17 +41,20 @@ const walk = dir => {
             results.push(file);
         }
     });
+
     return results;
 };
-const updatePartition = (partition, filePath) => {
-    if (!filePath.endsWith("ts") && !filePath.endsWith("mjs") && !filePath.endsWith("js")) {
+
+const sst = (partition, file) => {
+
+    if (!file.endsWith("ts") && !file.endsWith("mjs") && !file.endsWith("js")) {
         return;
     }
-    const old_partition = partition === 'aws' ? 'aws-cn' : 'aws';
-    const oldContent = fs.readFileSync(filePath, {encoding: 'utf8'});
+
+    const oldContent = fs.readFileSync(file, {encoding: 'utf8'});
 
     let newContent = oldContent.replaceAll(
-        'arn:aws:ssm:${app.region}',
+        /arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ssm:\${app.region}/g,
         'arn:${app.region.startsWith(\'cn\') ? \'aws-cn\' : \'aws\'}:ssm:${app.region}'
     );
 
@@ -61,23 +78,24 @@ const updatePartition = (partition, filePath) => {
     //     "`arn:${this.node.root.region.startsWith('cn')?'aws-cn':'aws'}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole`"
     // );
 
+    // *Pattern* : `^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\-0-9]*:[0-9]{12}:security-group/.*$`
+
     newContent = newContent.replaceAll(
-        `arn:${old_partition}:`,
+        /arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):/g,
         `arn:${partition}:`
     );
 
     // arn:aws-cn:ssm:${app.region}
     if (oldContent.toString() !== newContent.toString()) {
-        fs.writeFileSync(filePath, newContent, {encoding: 'utf-8'});
-        console.info(`${filePath} Updated`);
+        fs.writeFileSync(file, newContent, {encoding: 'utf-8'});
+        console.info(`${file} Updated`);
     }
 };
 
-const base = `${process.env.PWD}/node_modules`;
-
 // for sst
-walk(`${base}/@serverless-stack`).forEach(filePath => updatePartition(partition, filePath));
+walk(`${process.env.PWD}/node_modules/@serverless-stack`)
+    .forEach(file => sst(partition, file));
 
 // for other...
 
-console.info(`Your AWS partition has been switched to: ${partition}`);
+// console.info(`AWS Partition has been switched to: ${partition}`);
