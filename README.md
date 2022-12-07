@@ -1,6 +1,6 @@
 # README
 
-Just Support Change Partition for SST.
+Just Support Change Partition for Serverless Framework.
 
 ## Install
 
