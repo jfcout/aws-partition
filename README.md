@@ -1,6 +1,6 @@
 # README
 
-Just Support Change Partition for Serverless Framework.
+A CLI to help change AWS Partition for Serverless Framework.
 
 ## Install
 

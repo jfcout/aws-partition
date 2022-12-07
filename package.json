@@ -1,29 +1,27 @@
 {
   "name": "aws-partition",
-  "version": "0.0.2",
-  "description": "Just Support Change Partition for Serverless Framework.",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "version": "0.0.6",
+  "description": "A CLI to help change AWS Partition for Serverless Framework.",
+  "bin": {
+    "aws-partition": "bin/index.mjs"
+  },
   "type": "module",
   "keywords": [
     "aws",
-    "sst",
-    "partition"
+    "partition",
+    "serverless",
+    "gcr",
+    "sst"
   ],
-  "exports": {
-    "import": "./index.js"
-  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "npm publish --registry=https://registry.npmjs.org"
   },
   "publishConfig": {
     "access": "public"
   },
   "author": "elon.niu@gmail.com",
   "license": "MIT",
-  "bin": {
-    "aws-partition": "bin/index.js"
-  },
   "devDependencies": {
     "@types/node": "^18.11.11"
   }
