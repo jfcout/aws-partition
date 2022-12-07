@@ -5,7 +5,7 @@ import * as fs from "fs";
 import execSh from "exec-sh";
 
 const parsePackage = (file) => {
-    return JSON.parse(fs.readFileSync(file, {encoding: 'utf8'}));
+    return JSON.parse(fs.readFileSync(path.resolve(file), {encoding: 'utf8'}));
 };
 
 const version = () => {
