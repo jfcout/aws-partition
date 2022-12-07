@@ -1,7 +1,7 @@
 {
-  "name": "sst-partition",
-  "version": "0.0.5",
-  "description": "Just Support Change Partition for SST.",
+  "name": "aws-partition",
+  "version": "0.0.2",
+  "description": "Just Support Change Partition for Serverless Framework.",
   "main": "index.js",
   "types": "index.d.ts",
   "type": "module",
@@ -22,7 +22,7 @@
   "author": "elon.niu@gmail.com",
   "license": "MIT",
   "bin": {
-    "sst-partition": "bin/index.js"
+    "aws-partition": "bin/index.js"
   },
   "devDependencies": {
     "@types/node": "^18.11.11"

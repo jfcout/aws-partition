@@ -5,11 +5,11 @@ Just Support Change Partition for SST.
 ## Install
 
 ```shell
-npm install sst-partition --save
+npm install aws-partition --save
 ```
 
 ## CLI
 
 ```bash
-sst-partition aws
+aws-partition aws
 ```

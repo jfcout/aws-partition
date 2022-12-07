@@ -35,10 +35,38 @@ const updatePartition = (partition, filePath) => {
     }
     const old_partition = partition === 'aws' ? 'aws-cn' : 'aws';
     const oldContent = fs.readFileSync(filePath, {encoding: 'utf8'});
-    const newContent = oldContent.replaceAll(
+
+    let newContent = oldContent.replaceAll(
+        'arn:aws:ssm:${app.region}',
+        'arn:${app.region.startsWith(\'cn\') ? \'aws-cn\' : \'aws\'}:ssm:${app.region}'
+    );
+
+    // newContent = newContent.replaceAll(
+    //     'arn:aws:execute-api:${region}',
+    //     'arn:${region.startsWith(\'cn\') ? \'aws-cn\' : \'aws\'}:execute-api:${region}'
+    // );
+
+    // newContent = newContent.replaceAll(
+    //     'arn:aws:appsync:${region}',
+    //     'arn:${region.startsWith(\'cn\') ? \'aws-cn\' : \'aws\'}:appsync:${region}'
+    // );
+    //
+    // newContent = newContent.replaceAll(
+    //     'arn:aws:s3:::${app.bootstrapAssets.bucketName}',
+    //     'arn:${app.region.startsWith(\'cn\') ? \'aws-cn\' : \'aws\'}:s3:::${app.bootstrapAssets.bucketName}'
+    // );
+
+    // newContent = newContent.replaceAll(
+    //     `"arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"`,
+    //     "`arn:${this.node.root.region.startsWith('cn')?'aws-cn':'aws'}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole`"
+    // );
+
+    newContent = newContent.replaceAll(
         `arn:${old_partition}:`,
         `arn:${partition}:`
     );
+
+    // arn:aws-cn:ssm:${app.region}
     if (oldContent.toString() !== newContent.toString()) {
         fs.writeFileSync(filePath, newContent, {encoding: 'utf-8'});
         console.info(`${filePath} Updated`);
@@ -48,4 +76,4 @@ const updatePartition = (partition, filePath) => {
 const dir = `${process.env.PWD}/node_modules/@serverless-stack`;
 walk(dir).forEach(filePath => updatePartition(partition, filePath));
 
-console.info(`Now, your AWS partition is: ${partition}`);
+console.info(`Now, your AWS partition is --: ${partition}`);
