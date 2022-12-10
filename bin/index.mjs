@@ -5,7 +5,7 @@ import * as fs from "fs";
 import execSh from "exec-sh";
 
 const version = () => {
-    console.info(`aws-partition Current Version: 0.0.26`);
+    console.info(`aws-partition Current Version: 0.0.27`);
 };
 
 const command = process.argv[2];
@@ -59,7 +59,7 @@ const walk = dir => {
 
 const sst = (file) => {
 
-    if (!file.endsWith("ts") && !file.endsWith("mjs") && !file.endsWith("js")) {
+    if (!file.endsWith("ts") && !file.endsWith("mjs") && !file.endsWith("js") && !file.endsWith("json")) {
         return;
     }
 
