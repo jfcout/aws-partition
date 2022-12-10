@@ -5,7 +5,7 @@ import * as fs from "fs";
 import execSh from "exec-sh";
 
 const version = () => {
-    console.info(`aws-partition Current Version: 0.0.28`);
+    console.info(`aws-partition Current Version: 0.0.29`);
 };
 
 const command = process.argv[2];
@@ -77,13 +77,18 @@ const sst = (file) => {
     //     '// cdk-bak.Tags.of(child).add("sst:'
     // );
 
-    const newContent = oldContent.replaceAll(
+    let newContent = oldContent.replaceAll(
         /arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):/g,
         `arn:${command}:`
-    ).replaceAll(
-        'cdk.Tags.of(child).add("sst:',
-        '// cdk-bak.Tags.of(child).add("sst:'
     );
+
+    const tag_code = 'cdk.Tags.of(child).add("sst:';
+    const tag_code_no = '// cdk-bak.Tags.of(child).add("sst:';
+    if (command === 'aws-cn') {
+        newContent = newContent.replaceAll(tag_code, tag_code_no);
+    } else {
+        newContent = newContent.replaceAll(tag_code_no, tag_code);
+    }
 
     if (oldContent.toString() !== newContent.toString()) {
         fs.writeFileSync(file, newContent, {encoding: 'utf-8'});
