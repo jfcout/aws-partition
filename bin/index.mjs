@@ -5,7 +5,7 @@ import * as fs from "fs";
 import execSh from "exec-sh";
 
 const version = () => {
-    console.info(`aws-partition version: 0.0.22`);
+    console.info(`aws-partition version: 0.0.23`);
 };
 
 const command = process.argv[2];
@@ -91,7 +91,8 @@ const sst = (file) => {
 };
 
 // for sst
-const sst_path = './node_modules/@serverless-stack';
+// const sst_path = './node_modules/@serverless-stack';
+const sst_path = './node_modules';
 
 if (fs.existsSync(sst_path)) {
     console.info('SST Found');
