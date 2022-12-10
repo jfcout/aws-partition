@@ -1,6 +1,6 @@
 {
   "name": "aws-partition",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "A CLI to help change AWS Partition for Serverless Framework.",
   "bin": {
     "aws-partition": "bin/index.mjs"
