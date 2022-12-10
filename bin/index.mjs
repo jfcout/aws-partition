@@ -8,14 +8,20 @@ const version = () => {
     console.info(`aws-partition version: 0.0.19`);
 };
 
+const command = process.argv[2];
+const commands = ['aws', 'aws-cn', 'aws-us-gov', 'aws-iso', 'aws-iso-b', 'update', 'version'];
+
+if (!commands.includes(command)) {
+    console.info('Command must be one of: ' + commands.join('|'));
+    process.exit(-1);
+}
+
 if (!process.argv[2]) {
     console.info('Must input command');
     process.exit(-1);
 }
 
-const command = process.argv[2];
-
-if (command === 'update' || command === 'upgrade') {
+if (command === 'update') {
     execSh("npm i -g aws-partition --registry=https://registry.npmjs.org",
         {},
         function (err, out) {
@@ -30,13 +36,6 @@ if (command === 'update' || command === 'upgrade') {
 if (command === 'version' || command === '-v') {
     version();
     process.exit(0);
-}
-
-const partitions = ['aws', 'aws-cn', 'aws-us-gov', 'aws-iso', 'aws-iso-b'];
-
-if (!partitions.includes(process.argv[2])) {
-    console.info('Partition must be one of: ' + partitions.join(', '));
-    process.exit(-1);
 }
 
 const walk = dir => {
