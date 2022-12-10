@@ -5,7 +5,7 @@ import * as fs from "fs";
 import execSh from "exec-sh";
 
 const version = () => {
-    console.info(`aws-partition Current Version: 0.0.27`);
+    console.info(`aws-partition Current Version: 0.0.28`);
 };
 
 const command = process.argv[2];
@@ -38,10 +38,13 @@ if (command === 'version' || command === '-v') {
     process.exit(0);
 }
 
-const walk = dir => {
+const formats = ['ts', 'mjs', 'js', 'json'];
+
+const walk = (dir) => {
     let results = [];
 
     const list = fs.readdirSync(dir);
+
     list.forEach(file => {
         file = path.join(dir, file);
         const stat = fs.statSync(file);
@@ -50,7 +53,9 @@ const walk = dir => {
             results = [...results, ...walk(file)];
         } else {
             // Is a file
-            results.push(file);
+            if (formats.includes(file.split('.').pop())) {
+                results.push(file);
+            }
         }
     });
 
@@ -58,10 +63,6 @@ const walk = dir => {
 };
 
 const sst = (file) => {
-
-    if (!file.endsWith("ts") && !file.endsWith("mjs") && !file.endsWith("js") && !file.endsWith("json")) {
-        return;
-    }
 
     const oldContent = fs.readFileSync(file, {encoding: 'utf8'});
 
