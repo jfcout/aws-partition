@@ -5,7 +5,7 @@ import * as fs from "fs";
 import execSh from "exec-sh";
 
 const version = () => {
-    console.info(`aws-partition version: 0.0.23`);
+    console.info(`aws-partition version: 0.0.24`);
 };
 
 const command = process.argv[2];
@@ -95,7 +95,7 @@ const sst = (file) => {
 const sst_path = './node_modules';
 
 if (fs.existsSync(sst_path)) {
-    console.info('SST Found');
+    console.info('SST Start');
     walk(sst_path)
         .forEach(file => sst(file));
     console.info('SST Done');
