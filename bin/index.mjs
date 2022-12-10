@@ -5,7 +5,7 @@ import * as fs from "fs";
 import execSh from "exec-sh";
 
 const version = () => {
-    console.info(`aws-partition version: 0.0.25`);
+    console.info(`aws-partition Current Version: 0.0.26`);
 };
 
 const command = process.argv[2];
