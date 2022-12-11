@@ -3,25 +3,27 @@
 import * as path from "path";
 import * as fs from "fs";
 import execSh from "exec-sh";
+import chalk from 'chalk';
+
+const warning = chalk.hex('#EC7211');
+const log = console.log;
 
 const version = () => {
-    console.info(`aws-partition Current Version: 0.0.29`);
+    log(warning('aws-partition') + ' current version: ' + chalk.green('0.0.30'));
 };
 
 const command = process.argv[2];
 const commands = ['aws', 'aws-cn', 'aws-us-gov', 'aws-iso', 'aws-iso-b', 'update', 'version'];
 
 if (!commands.includes(command)) {
-    console.info('Command must be one of: ' + commands.join('|'));
-    process.exit(-1);
-}
-
-if (!process.argv[2]) {
-    console.info('Must input command');
+    version();
+    console.info('The command can only be one of ' + chalk.blue(commands.join('|' +
+        '')));
     process.exit(-1);
 }
 
 if (command === 'update') {
+    version();
     execSh("npm i -g aws-partition --registry=https://registry.npmjs.org",
         {},
         function (err, out) {
@@ -96,13 +98,11 @@ const sst = (file) => {
     }
 };
 
-// for sst
-// const sst_path = './node_modules/@serverless-stack';
-const sst_path = './node_modules';
+const node_path = './node_modules';
 
-if (fs.existsSync(sst_path)) {
-    console.info('SST Start');
-    walk(sst_path)
+if (fs.existsSync(node_path)) {
+    console.info(warning('aws-partition') + ' Start');
+    walk(node_path)
         .forEach(file => sst(file));
-    console.info('SST Done');
+    console.info(warning('aws-partition') + ' Done');
 }
