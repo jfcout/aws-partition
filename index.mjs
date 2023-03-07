@@ -9,16 +9,12 @@ const warning = chalk.hex('#EC7211');
 const log = console.log;
 
 const version = () => {
-    log(warning('aws-partition') + ' current version: ' + chalk.green('0.0.32'));
+    log(warning('aws-partition') + ' current version: ' + chalk.green('0.0.33'));
 };
 
 const command = process.argv[2];
 const node_path = process.argv[3] ? process.argv[3] : './node_modules';
 const commands = ['aws', 'aws-cn', 'aws-us-gov', 'aws-iso', 'aws-iso-b', 'update', 'version'];
-
-version();
-log(warning('aws-partition') + ' partition: ' + chalk.green(command));
-log(warning('aws-partition') + ' node_path: ' + chalk.green(node_path));
 
 if (!commands.includes(command)) {
     version();
@@ -46,6 +42,10 @@ if (command === 'version' || command === '-v') {
 }
 
 const formats = ['ts', 'mjs', 'js', 'json'];
+
+version();
+log(warning('aws-partition') + ' partition: ' + chalk.green(command));
+log(warning('aws-partition') + ' node_path: ' + chalk.green(node_path));
 
 const walk = (dir) => {
     let results = [];
