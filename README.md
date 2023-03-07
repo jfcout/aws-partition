@@ -23,7 +23,7 @@ aws-partition aws-cn
 aws-partition aws
 ```
 
-## Specify directory when switching partitions
+## Specify directory for scan
 ```bash
 aws-partition aws-cn /Users/*/sst-demo
 ```
