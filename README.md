@@ -11,11 +11,6 @@ npm install aws-partition -g
 ## Update
 
 ```bash
-aws-partition
-```
-
-## Use
-
-```shell
-export AWS_PARTITION=aws
+aws-partition aws-cn
+aws-partition aws
 ```
