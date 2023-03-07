@@ -8,14 +8,22 @@ A CLI to help change AWS Partition for Serverless Framework.
 npm install aws-partition -g
 ```
 
-## Update
-
+## Get supported partitions
 ```bash
 aws-partition
 ```
 
-## Use
+## Switch partition to China
+```bash
+aws-partition aws-cn
+```
 
-```shell
-export AWS_PARTITION=aws
+## Switch partition to Global
+```bash
+aws-partition aws
+```
+
+## Specify directory when switching partitions
+```bash
+aws-partition aws-cn /Users/*/sst-demo
 ```

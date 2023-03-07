@@ -9,11 +9,16 @@ const warning = chalk.hex('#EC7211');
 const log = console.log;
 
 const version = () => {
-    log(warning('aws-partition') + ' current version: ' + chalk.green('0.0.30'));
+    log(warning('aws-partition') + ' current version: ' + chalk.green('0.0.32'));
 };
 
 const command = process.argv[2];
+const node_path = process.argv[3] ? process.argv[3] : './node_modules';
 const commands = ['aws', 'aws-cn', 'aws-us-gov', 'aws-iso', 'aws-iso-b', 'update', 'version'];
+
+version();
+log(warning('aws-partition') + ' partition: ' + chalk.green(command));
+log(warning('aws-partition') + ' node_path: ' + chalk.green(node_path));
 
 if (!commands.includes(command)) {
     version();
@@ -84,6 +89,11 @@ const sst = (file) => {
         `arn:${command}:`
     );
 
+    newContent = newContent.replaceAll(
+        /project.config.region\?.startsWith\("us-gov-"\)/g,
+        `(project.config.region?.startsWith("us-gov-") || project.config.region?.startsWith("cn-"))`
+    );
+
     const tag_code = 'cdk.Tags.of(child).add("sst:';
     const tag_code_no = '// cdk-bak.Tags.of(child).add("sst:';
     if (command === 'aws-cn') {
@@ -97,8 +107,6 @@ const sst = (file) => {
         console.info(`${file} Updated`);
     }
 };
-
-const node_path = './node_modules';
 
 if (fs.existsSync(node_path)) {
     console.info(warning('aws-partition') + ' Start');
